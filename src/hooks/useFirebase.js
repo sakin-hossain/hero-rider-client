@@ -14,23 +14,23 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    const registerUser = (email, password, name, navigate) => {
+    const registerUser = (email, password, name, data, navigate) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                const destination = '/';
+                navigate(destination);
                 setAuthError('');
                 const newUser = { email, displayName: name };
                 setUser(newUser);
                 // save user to the database
-                // saveUser(email, name, 'POST');
+                saveUser(data);
                 // send name to firebase after creation
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
                 }).catch((error) => {
                 });
-                const destination = '/';
-                navigate(destination);
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -70,11 +70,11 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth])
 
-    // useEffect(() => {
-    //     fetch(`https://stark-caverns-04377.herokuapp.com/users/${user.email}`)
-    //         .then(res => res.json())
-    //         .then(data => setAdmin(data.admin))
-    // }, [user.email])
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
 
     const logout = () => {
         setIsLoading(true);
@@ -86,17 +86,18 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-    // const saveUser = (email, displayName, method) => {
-    //     const user = { email, displayName };
-    //     fetch('https://stark-caverns-04377.herokuapp.com/users', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then()
-    // }
+    const saveUser = (data) => {
+        const user = data;
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    }
+
 
     return {
         user,

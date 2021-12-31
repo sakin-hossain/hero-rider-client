@@ -5,6 +5,7 @@ import AuthProvider from './Context/AuthProvider';
 import Login from './Pages/Auth/Login/Login';
 import PrivateRoute from './Pages/Auth/PrivateRoute/PrivateRoute';
 import SignUp from './Pages/Auth/SignUp/SignUp';
+import MakeAdmin from './Pages/Home/Admin/MakeAdmin/MakeAdmin';
 import Home from './Pages/Home/Home';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signUp" element={<SignUp/>}/>
+            <Route path="/makeAdmin" element={<MakeAdmin/>}/>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -12,38 +11,38 @@ const Learner = () => {
     const navigate = useNavigate();
 
     const onSubmit = data => {
+        console.log(userData);
         if(data.password !== data.conPassword){
             alert('Your Password does not match');
             return;
         }
         const newData = {...data, type:'learner'}
         setUserData(newData);
-        registerUser(userData.email, userData.password, userData.name, navigate);
+        registerUser(userData.email, userData.password, userData.name, userData, navigate);
 
-        axios.post('http://localhost:5000/users', userData)
-        .then(res => {
-            if(res.data.acknowledged){
-                window.confirm('Register Successfully');
-                reset();
-            }
-        })
+        // axios.post('http://localhost:5000/users', userData)
+        // .then(res => {
+        //     if(res.data.acknowledged){
+        //         window.confirm('Register Successfully');
+        //         reset();
+        //     }
+        // })
     }
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" {...register("name")} name="name" placeholder="Learner name.."/>
-                <input type="text" {...register("email")} name="email" placeholder="Learner Email.."/>
-                <input type="text" {...register("address")} name="address" placeholder="Learner Email.."/>
+                <input type="text" {...register("name", { required: true})} name="name" placeholder="Learner name.."/>
+                <input type="text" {...register("email", { required: true})} name="email" placeholder="Learner Email.."/>
+                <input type="text" {...register("address", { required: true})} name="address" placeholder="Learner Address.."/>
                 <input type="number" {...register("phone")} name="phone" placeholder="Learner Phone Number.."/>
-                <input type="number" {...register("age")} name="age" placeholder="Learner Age.."/>
+                <input type="number" {...register("age", { required: true})} name="age" placeholder="Learner Age.."/>
                 <label htmlFor="proPic">Profile Picture</label>
-                <input type="file" id='proPic' name="profile-picture"  {...register("proPic")} placeholder="Learner Profile Picture.."/>
+                <input type="file" id='proPic' name="profile-picture"  {...register("proPic", { required: true})} placeholder="Learner Profile Picture.."/>
                 <label htmlFor="nidPicture">NID Picture</label>
-                <input type="file" id='nidPicture' name="nid-picture"  {...register("nid")} placeholder="Learner NID Picture.."/>
-                <textarea type="text" name="car-information"  {...register("carInformation")} placeholder="Learner Car Information (name, model, name palate).." />
-                <input type="password" {...register("password")} name="password" placeholder="Password.."/>
-                <input type="password" {...register("conPassword")} name="conPassword" placeholder="Confirm Password.."/>
-                <select {...register("vehicleType")} name="vehicleType">
+                <input type="file" id='nidPicture' name="nid-picture"  {...register("nid", { required: true})} placeholder="Learner NID Picture.."/>
+                <input type="password" {...register("password", { required: true})} name="password" placeholder="Password.."/>
+                <input type="password" {...register("conPassword", { required: true})} name="conPassword" placeholder="Confirm Password.."/>
+                <select {...register("vehicleType", { required: true})} name="vehicleType">
                     <option value="bike">Male</option>
                     <option value="car">Female</option>
                 </select>
