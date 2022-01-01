@@ -16,7 +16,7 @@ const UserHome = () => {
             setUsers(data.result.find(u => u.email === user.email))
         });
     },[]);
-    console.log(users);
+    
     const handleCarOrder = () => {
         const data = {
             name: "car",
