@@ -6,7 +6,7 @@ import "../SignUp.css";
 
 const Rider = () => {
     const [userData, setUserData] = useState({});
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const {registerUser} = useAuth();
     const navigate = useNavigate();
 
@@ -18,14 +18,6 @@ const Rider = () => {
         const newData = {...data, type:'rider'}
         setUserData(newData);
         registerUser(userData.email, userData.password, userData.name, userData, navigate);
-
-        // axios.post('http://localhost:5000/users', userData)
-        // .then(res => {
-        //     if(res.data.acknowledged){
-        //         window.confirm('Register Successfully');
-        //         reset();
-        //     }
-        // })
     }
 
     return (

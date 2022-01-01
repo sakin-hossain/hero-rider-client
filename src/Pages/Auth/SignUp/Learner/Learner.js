@@ -5,7 +5,7 @@ import useAuth from '../../../../hooks/useAuth';
 
 const Learner = () => {
     const [userData, setUserData] = useState({})
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const {registerUser} = useAuth();
     const navigate = useNavigate();
@@ -19,14 +19,6 @@ const Learner = () => {
         const newData = {...data, type:'learner'}
         setUserData(newData);
         registerUser(userData.email, userData.password, userData.name, userData, navigate);
-
-        // axios.post('http://localhost:5000/users', userData)
-        // .then(res => {
-        //     if(res.data.acknowledged){
-        //         window.confirm('Register Successfully');
-        //         reset();
-        //     }
-        // })
     }
     return (
         <div>

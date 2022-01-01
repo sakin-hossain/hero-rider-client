@@ -71,7 +71,7 @@ const useFirebase = () => {
     }, [auth])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://guarded-inlet-37110.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])
@@ -86,9 +86,10 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+
     const saveUser = (data) => {
         const user = data;
-        fetch('http://localhost:5000/users', {
+        fetch('https://guarded-inlet-37110.herokuapp.com/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

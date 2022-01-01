@@ -1,0 +1,28 @@
+.admin-container {
+  text-align: center;
+  background-color: #fff;
+  min-height: 100vh;
+}
+.admin-container input {
+  text-align: center;
+  width: 30%;
+  margin: 20px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid black;
+}
+.pagination {
+  margin-left: 10px;
+}
+.pagination button {
+  margin-right: 15px;
+  padding: 0 10px;
+}
+.pagination .selected {
+  background-color: cadetblue;
+  color: white;
+}
+input[type="checkbox"] {
+  width: 10px;
+  margin: 5px;
+}

@@ -1,21 +1,20 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
+import Admin from './Admin/Admin';
+import "./Home.css";
+import UserHome from './UserHome/UserHome';
 
-const Home = () => {const { logout} = useAuth();
+const Home = () => {
+    const { admin,logout } = useAuth();
+
     return (
-        <div>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button onClick={logout} variant="primary">Go somewhere</Button>
-                </Card.Body>
-            </Card>
+        <div className='home-container'>
+            <div className='text-center'>
+                <button className='btn btn-primary ms-end' onClick={logout}>Log Out</button>
+            </div>
+            {
+                admin ? <Admin/> : <UserHome/>
+            }
         </div>
     );
 };

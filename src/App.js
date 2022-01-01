@@ -7,6 +7,7 @@ import PrivateRoute from './Pages/Auth/PrivateRoute/PrivateRoute';
 import SignUp from './Pages/Auth/SignUp/SignUp';
 import MakeAdmin from './Pages/Home/Admin/MakeAdmin/MakeAdmin';
 import Home from './Pages/Home/Home';
+import Payment from './Pages/Home/UserHome/Payment/Payment';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signUp" element={<SignUp/>}/>
             <Route path="/makeAdmin" element={<MakeAdmin/>}/>
+            <Route path="/payment/:id" element={<Payment/>}/>
           </Routes>
         </BrowserRouter>
       </AuthProvider>

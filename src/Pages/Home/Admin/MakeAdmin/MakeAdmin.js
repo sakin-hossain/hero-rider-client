@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 const MakeAdmin = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        axios.put(`http://localhost:5000/users/${data.email}`)
+        axios.put(`https://guarded-inlet-37110.herokuapp.com/users/${data.email}`)
             .then(res => {
                 if (res.data.modifiedCount) {
                     alert("Admin added successful");
