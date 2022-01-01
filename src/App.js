@@ -8,6 +8,7 @@ import SignUp from './Pages/Auth/SignUp/SignUp';
 import MakeAdmin from './Pages/Home/Admin/MakeAdmin/MakeAdmin';
 import Home from './Pages/Home/Home';
 import Payment from './Pages/Home/UserHome/Payment/Payment';
+import NotFound from './Pages/Shared/NotFound/NoteFound';
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
             <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signUp" element={<SignUp/>}/>
-            <Route path="/makeAdmin" element={<MakeAdmin/>}/>
-            <Route path="/payment/:id" element={<Payment/>}/>
+            <Route path="/makeAdmin" element={<PrivateRoute><MakeAdmin/></PrivateRoute>}/>
+            <Route path="/payment/:id" element={<PrivateRoute><Payment/></PrivateRoute>}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
