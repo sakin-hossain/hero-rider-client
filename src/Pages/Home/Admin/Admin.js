@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import useAuth from '../../../hooks/useAuth';
 import "./Admin.css";
 
 const Admin = () => {
+    const {user} = useAuth();
     const [users, setUsers] = useState([]);
     const [displayProducts, setDisplayProducts] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [page, setPage] = useState(0);
+    const [blockUser, setBlockUser] = useState({});
     const size = 10;
 
     const { register, handleSubmit } = useForm();
@@ -31,7 +34,10 @@ const Admin = () => {
         setDisplayProducts(matchedProducts);
     }
     const handleCheckBox = (id) => {
-        console.log(id);
+        const newBlockUser = {...blockUser};
+        newBlockUser['id'] = id;
+        setBlockUser(newBlockUser);
+        console.log(blockUser);
     }
     const onSubmit = data => {
         console.log(data);
@@ -55,7 +61,7 @@ const Admin = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                    <th>#</th>
+                    <th>Disable</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
@@ -70,7 +76,7 @@ const Admin = () => {
                     <tbody key={user._id}>
                         <tr>
                         <td>
-                            <input onChange={()=>handleCheckBox(user.email)} type="checkbox"/>
+                            <input onClick={() =>handleCheckBox(user._id)} type="checkbox"/>
                         </td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
